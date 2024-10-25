@@ -9,9 +9,10 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
 
   const config = new DocumentBuilder()
-    .setTitle('QE170097 - Students API')
-    .setDescription('Assignment 3 - API CRUD WITH SPECIFICATION')
-    .setVersion('2.0')
+    .setTitle('QE170097 - Users API')
+    .setDescription('Assignment 4 -  AUTHENTICATION')
+    .setVersion('1.0')
+    .addBearerAuth()
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api-docs', app, documentFactory);
