@@ -1,4 +1,3 @@
-// src/auth/auth.module.ts
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
@@ -16,7 +15,7 @@ import { jwtConstants } from './constants';
     JwtModule.register({
       global: true,
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: process.env.JWT_EXPIRATION || '60s' },
+      signOptions: { expiresIn: process.env.JWT_EXPIRATION || '1h' },
     }),
   ],
   providers: [AuthService, JwtStrategy],
