@@ -7,17 +7,20 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { UserSchema } from 'src/schema/user.schema';
 import { JwtStrategy } from './jwt.strategy';
+import { jwtConstants } from './constants';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
     PassportModule,
     JwtModule.register({
-      secret: process.env.JWT_SECRET || 'secret',
-      signOptions: { expiresIn: process.env.JWT_EXPIRATION || '1h' },
+      global: true,
+      secret: jwtConstants.secret,
+      signOptions: { expiresIn: process.env.JWT_EXPIRATION || '60s' },
     }),
   ],
   providers: [AuthService, JwtStrategy],
   controllers: [AuthController],
+  exports: [AuthService],
 })
 export class AuthModule {}

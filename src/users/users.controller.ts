@@ -13,12 +13,14 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @Get('me')
   getMe(@Req() req) {
-    return this.usersService.getMe(req.user.userId);
+    const userId = req.user.sub;
+    return this.usersService.getMe(userId);
   }
 
   @UseGuards(JwtAuthGuard)
   @Put('me')
   updateMe(@Req() req, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.updateMe(req.user.userId, updateUserDto);
+    const userId = req.user.sub;
+    return this.usersService.updateMe(userId, updateUserDto);
   }
 }
